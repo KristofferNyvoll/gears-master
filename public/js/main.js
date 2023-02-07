@@ -57,6 +57,9 @@ var main = new (function () {
     self.showWhatsNew();
   };
 
+  // Create list of tuples with timestamp and keypress
+  var trackedData = [];
+
   // Update text already in html
   this.updateTextLanguage = function () {
     $("#navBlocks").text(i18n.get("#main-blocks#"));
@@ -272,10 +275,12 @@ var main = new (function () {
   document.addEventListener(
     "keyup",
     (event) => {
-      var name = event.key;
+      // var name = event.key;
       var code = event.code;
       // Alert the key name and key code on keydown
-      alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+      // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+      trackedData.push({ timestamp: Date.now(), trigger: code });
+      console.log(trackedData);
     },
     false
   );
@@ -423,6 +428,9 @@ var main = new (function () {
         "<p>Gears is a Free and Open Source Software</p>" +
         "</div>"
     );
+
+    trackedData.push({ timestamp: Date.now(), trigger: "dashboardOpened" });
+    console.log(trackedData);
 
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
