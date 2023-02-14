@@ -412,8 +412,8 @@ var main = new (function () {
     let $body = $(
       '<div class="about">' +
         "<div></div>" +
-        "<h3>Så halla dashboard</h3>" +
-        "<p>Så her e ting med design thinking da.</p>" +
+        "<h3>This is the dashboard</h3>" +
+        "<p>Maybe we can do some design thinking magic here?</p>" +
         "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
         "<ul>" +
         "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
@@ -421,25 +421,32 @@ var main = new (function () {
         "<li>osv</li>" +
         "<li>osv</li>" +
         "</ul>" +
-        "<h3>øhø</h3>" +
-        "<p>hø?</p>" +
-        "<h3>License</h3>" +
-        "<p>GNU General Public License v3.0</p>" +
-        "<p>Gears is a Free and Open Source Software</p>" +
+        "<h3>Content</h3>" +
+        "<p>content?</p>" +
         "</div>"
     );
+    var timeDashboardOpened = Date.now();
 
-    trackedData.push({ timestamp: Date.now(), trigger: "dashboardOpened" });
+    trackedData.push({
+      timestamp: timeDashboardOpened,
+      trigger: "dashboardOpened",
+    });
     console.log(trackedData);
 
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
     );
 
-    let $dialog = dialog("About", $body, $buttons);
+    let $dialog = dialog("Dashboard", $body, $buttons);
 
     $buttons.click(function () {
-      console.log("hehe");
+      const timeDashboardClosed = Date.now();
+      console.log(
+        "dashboard was opened at " +
+          timeDashboardOpened +
+          " and closed at " +
+          timeDashboardClosed
+      );
       $dialog.close();
     });
   };
