@@ -17,6 +17,7 @@ var main = new (function () {
     self.$worldsMenu = $(".worldsMenu");
     self.$helpMenu = $(".helpMenu");
     self.$dashBoard = $(".dashBoard");
+    self.$idModal = $(".idModal");
     self.$projectName = $("#projectName");
     self.$languageMenu = $(".language");
     // python icon controls
@@ -37,6 +38,7 @@ var main = new (function () {
     self.$worldsMenu.click(self.toggleWorldsMenu);
     self.$helpMenu.click(self.toggleHelpMenu);
     self.$dashBoard.click(self.openDashBoard);
+    self.$idModal.click(self.openidModal);
     self.$languageMenu.click(self.toggleLanguageMenu);
     self.$newsButton.click(self.showNews);
 
@@ -69,6 +71,7 @@ var main = new (function () {
     self.$worldsMenu.text(i18n.get("#main-worlds#"));
     self.$helpMenu.text(i18n.get("#main-help#"));
     self.$dashBoard.text(i18n.get("#main-dashboard#"));
+    self.$idModal.text(i18n.get("#main-idModal#"));
   };
 
   // Toggle language menu
@@ -441,12 +444,35 @@ var main = new (function () {
 
     $buttons.click(function () {
       const timeDashboardClosed = Date.now();
-      console.log(
-        "dashboard was opened at " +
-          timeDashboardOpened +
-          " and closed at " +
-          timeDashboardClosed
-      );
+      trackedData.push({
+        timestamp: timeDashboardClosed,
+        trigger: "dashboardClosed",
+      });
+      console.log(trackedData);
+      $dialog.close();
+    });
+  };
+
+  // idModal
+  this.openidModal = function () {
+    let $input = $('<input type="number">');
+    let $body = $(
+      '<div class="about">' +
+        "<div></div>" +
+        "<h3>This is the id modal</h3>" +
+        "<p>content?</p>" +
+        "</div>"
+    );
+
+    let $buttons = $(
+      '<button type="button" class="confirm btn-success">Ok</button>'
+    );
+    $body.append($input);
+
+    let $dialog = dialog("idModal", $body, $buttons);
+
+    $buttons.click(function () {
+      console.log($input.val());
       $dialog.close();
     });
   };
