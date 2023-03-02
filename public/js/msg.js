@@ -1446,6 +1446,18 @@ let MSGS = {
     ru: "Справка",
     hu: "Súgó",
   },
+  "#main-idModal#": {
+    en: "IDModal",
+    tlh: "QaH",
+    es: "Ayuda",
+    fr: "Aide",
+    el: "Βοήθεια",
+    nl: "Help",
+    de: "Hilfe",
+    he: "עזרה",
+    ru: "Справка",
+    hu: "Súgó",
+  },
   "#main-whats_new#": {
     en: "What's New",
     nl: "Wat is nieuw",

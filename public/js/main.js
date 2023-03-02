@@ -17,6 +17,7 @@ var main = new (function () {
     self.$worldsMenu = $(".worldsMenu");
     self.$helpMenu = $(".helpMenu");
     self.$dashBoard = $(".dashBoard");
+    self.$idModal = $(".idModal");
     self.$projectName = $("#projectName");
     self.$languageMenu = $(".language");
     // python icon controls
@@ -37,6 +38,7 @@ var main = new (function () {
     self.$worldsMenu.click(self.toggleWorldsMenu);
     self.$helpMenu.click(self.toggleHelpMenu);
     self.$dashBoard.click(self.openDashBoard);
+    self.$idModal.click(self.openidModal);
     self.$languageMenu.click(self.toggleLanguageMenu);
     self.$newsButton.click(self.showNews);
 
@@ -57,6 +59,9 @@ var main = new (function () {
     self.showWhatsNew();
   };
 
+  // Create list of tuples with timestamp and keypress
+  var trackedData = [];
+
   // Update text already in html
   this.updateTextLanguage = function () {
     $("#navBlocks").text(i18n.get("#main-blocks#"));
@@ -66,6 +71,7 @@ var main = new (function () {
     self.$worldsMenu.text(i18n.get("#main-worlds#"));
     self.$helpMenu.text(i18n.get("#main-help#"));
     self.$dashBoard.text(i18n.get("#main-dashboard#"));
+    self.$idModal.text(i18n.get("#main-idModal#"));
   };
 
   // Toggle language menu
@@ -272,10 +278,12 @@ var main = new (function () {
   document.addEventListener(
     "keyup",
     (event) => {
-      var name = event.key;
+      // var name = event.key;
       var code = event.code;
       // Alert the key name and key code on keydown
-      alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+      // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+      trackedData.push({ timestamp: Date.now(), trigger: code });
+      console.log(trackedData);
     },
     false
   );
@@ -407,8 +415,8 @@ var main = new (function () {
     let $body = $(
       '<div class="about">' +
         "<div></div>" +
-        "<h3>Så halla dashboard</h3>" +
-        "<p>Så her e ting med design thinking da.</p>" +
+        "<h3>This is the dashboard</h3>" +
+        "<p>Maybe we can do some design thinking magic here?</p>" +
         "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
         "<ul>" +
         "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
@@ -416,22 +424,55 @@ var main = new (function () {
         "<li>osv</li>" +
         "<li>osv</li>" +
         "</ul>" +
-        "<h3>øhø</h3>" +
-        "<p>hø?</p>" +
-        "<h3>License</h3>" +
-        "<p>GNU General Public License v3.0</p>" +
-        "<p>Gears is a Free and Open Source Software</p>" +
+        "<h3>Content</h3>" +
+        "<p>content?</p>" +
+        "</div>"
+    );
+    var timeDashboardOpened = Date.now();
+
+    trackedData.push({
+      timestamp: timeDashboardOpened,
+      trigger: "dashboardOpened",
+    });
+    console.log(trackedData);
+
+    let $buttons = $(
+      '<button type="button" class="confirm btn-success">Ok</button>'
+    );
+
+    let $dialog = dialog("Dashboard", $body, $buttons);
+
+    $buttons.click(function () {
+      const timeDashboardClosed = Date.now();
+      trackedData.push({
+        timestamp: timeDashboardClosed,
+        trigger: "dashboardClosed",
+      });
+      console.log(trackedData);
+      $dialog.close();
+    });
+  };
+
+  // idModal
+  this.openidModal = function () {
+    let $input = $('<input type="number">');
+    let $body = $(
+      '<div class="about">' +
+        "<div></div>" +
+        "<h3>This is the id modal</h3>" +
+        "<p>content?</p>" +
         "</div>"
     );
 
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
     );
+    $body.append($input);
 
-    let $dialog = dialog("About", $body, $buttons);
+    let $dialog = dialog("idModal", $body, $buttons);
 
     $buttons.click(function () {
-      console.log("hehe");
+      console.log($input.val());
       $dialog.close();
     });
   };
