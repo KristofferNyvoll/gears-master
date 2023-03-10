@@ -50,9 +50,9 @@
     <main>
       <nav>
         <ul class="panelTabs">
-          <li id="navBlocks" class="active">Blocks</li>
+          <!-- <li id="navBlocks" class="active">Blocks</li> -->
           <li id="navPython" class="pythonMain">
-            <span> Python </span>
+            <!-- <span> Python </span>
             <span class="py-mod-controls">
               <i
                 class="icon-upload upload-py-mod"
@@ -63,18 +63,17 @@
                 title="Download python main"
               ></i>
               <i class="icon-newFile add-py-mod" title="Add python module"></i>
-            </span>
+            </span> -->
           </li>
           <li id="navSim">Simulator</li>
         </ul>
         <div class="menuBar">
-          <div class="menuItem fileMenu">File</div>
+          <!-- <div class="menuItem fileMenu">File</div>
           <div class="menuItem pythonMenu">Python</div>
           <div class="menuItem robotMenu">Robot</div>
           <div class="menuItem worldsMenu">Worlds</div>
-          <div class="menuItem helpMenu">Help</div>
+          <div class="menuItem helpMenu">Help</div> -->
           <div class="menuItem dashBoard">Dashboard</div>
-          <div class="menuItem idModal">IDModal</div>
         </div>
 
         <div class="panelControlsArea">
@@ -96,7 +95,7 @@
           <div id="blocklyPages"><span class="currentPage">Main</span></div>
         </div>
 
-        <div class="panel" aria-labelledby="navPython">
+        <div class="panel hide" aria-labelledby="navPython">
           <div id="pythonCode"></div>
         </div>
 
@@ -225,6 +224,8 @@
     <script>
       // Init classes
       blockly.init();
+      //main.init();
+      console.log("index")
 
       function loadWorldFromGET() {
         let worldJSON = readGET("worldJSON");
@@ -275,7 +276,7 @@
             loadScript("js/worlds/extra/" + script + ".js?v=" + Date.now())
           );
         }
-
+        console.log("loadWS")
         return Promise.all(scriptsPromises);
       }
 
