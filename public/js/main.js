@@ -1195,15 +1195,15 @@ var main = new (function () {
 
     function getPanelByNav(nav) {
       // the python module panels are all in the dict, look there first
-      if (nav in self.pyModuleId2Panel) {
-        return self.pyModuleId2Panel[nav];
-      } else if (nav == "navBlocks") {
-        return blocklyPanel;
-      } else if (nav == "navPython") {
-        return pythonPanel;
-      } else if (nav == "navSim") {
-        return simPanel;
-      }
+      // if (nav in self.pyModuleId2Panel) {
+      //   return self.pyModuleId2Panel[nav];
+      // } else if (nav == "navBlocks") {
+      //   return blocklyPanel;
+      // } else if (nav == "navPython") {
+      //   return pythonPanel;
+      // } else if (nav == "navSim") {
+      return simPanel;
+      // }
     }
 
     // when deleting a python module, inActiveNav and inActive will be undefined
