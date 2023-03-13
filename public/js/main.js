@@ -1337,37 +1337,27 @@ var main = new (function () {
     acknowledgeDialog(options, function () {});
   };
 
+  function saveId() {
+    userId = document.getElementById("idField").value
+    console.log(userId)
+  }
+
+  let userId = 0
   // Display what's new if not seen before
   this.showWhatsNew = function (forceShow = false) {
     let current = 20220821;
-    let lastShown = localStorage.getItem("whatsNew");
-    if (lastShown == null || parseInt(lastShown) < current || forceShow) {
       let options = {
-        title: "What's New",
+        title: "Enter ID",
         message:
-          "<h3>21 Aug 2022 (Superpowered Complete!)</h3>" +
-          "<p>The FIRST Lego League 2022/2023 Superpowered missions are now complete.</p>" +
-          '<p>View a demo video <a href="https://youtu.be/-aoI6su6m84">on YouTube.</a></p>' +
-          "<h3>8 Aug 2022 (Superpowered)</h3>" +
-          "<p>Added the FIRST Lego League 2022/2023 Superpowered mission.</p>" +
-          "<p>" +
-          "It is incomplete for now, with only 4 out of 9 major mission models in place, but I will be adding to it over the coming days (...weeks?). " +
-          "If you would like to help, contact me to find out how." +
-          "</p>" +
-          "<h3>8 Aug 2022 (Challenges World)</h3>" +
-          "<p>" +
-          'A new "Challenges" world has been added. ' +
-          'It is using the new script loading system, so you will need to use this URL <a href="https://gears.aposteriori.com.sg/index.html?worldScripts=world_challenges">https://gears.aposteriori.com.sg/index.html?worldScripts=world_challenges</a> to access it.' +
-          "</p>" +
-          "<p>" +
-          'The "Challenges" world is designed for beginners, and consists of a series of basic coding challenges. ' +
-          'Educators who would like to create their own challenges should look at the <a href="https://github.com/QuirkyCort/gears/blob/master/public/js/worlds/extra/world_challenges.js">source code</a> to learn how.' +
-          "</p>",
+        "<label for='idField'>ID:</label>" +
+        "<input type='text' id='idField' name='idField'>" +
+        "<button id='idButton'> Enter </button>"
+        ,
       };
       acknowledgeDialog(options, function () {
         localStorage.setItem("whatsNew", current);
       });
-    }
+    document.getElementById("idButton").addEventListener("click", saveId)
   };
 
   // Display news
