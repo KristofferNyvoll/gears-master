@@ -410,23 +410,111 @@ var main = new (function () {
     }
   };
 
+  
+
   // Dashboard
+  let dashboardCount = 0
+  let content = [
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "bird" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton" disabled> <- </button>' +
+    '<button id="rightButton"> -> </button>',
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "is" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton"> <- </button>' +
+    '<button id="rightButton"> -> </button>',
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "the" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton"> <- </button>' +
+    '<button id="rightButton"> -> </button>',
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "word" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton"> <- </button>' +
+    '<button id="rightButton" disabled> -> </button>'
+  ]
+
+  function decrement() {
+    if(dashboardCount > 0) dashboardCount--
+
+    var timeDashboardDecremented = Date.now();
+
+    trackedData.push({
+      timestamp: timeDashboardDecremented,
+      trigger: "dashboardDecremented",
+    });
+    renderDashboard()
+
+    console.log(trackedData);
+  }
+  
+  function increment() {
+    if(dashboardCount < 3) dashboardCount++
+
+    var timeDashboardIncremented = Date.now();
+
+    trackedData.push({
+      timestamp: timeDashboardIncremented,
+      trigger: "dashboardIncremented",
+    });
+    renderDashboard()
+    
+    console.log(trackedData);
+  }
+
+  function renderDashboard() {
+    let dashboard = document.getElementById("dashboard")
+    dashboard.innerHTML = content[dashboardCount]
+    document.getElementById("rightButton").addEventListener("click", increment)
+    document.getElementById("leftButton").addEventListener("click", decrement)
+  }
+  
+  
   this.openDashBoard = function () {
+
     let $body = $(
-      '<div class="about">' +
-        "<div></div>" +
-        "<h3>This is the dashboard</h3>" +
-        "<p>Maybe we can do some design thinking magic here?</p>" +
-        "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
-        "<ul>" +
-        "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-        "<li>Trinnvis veiledning med problemløsning</li>" +
-        "<li>osv</li>" +
-        "<li>osv</li>" +
-        "</ul>" +
-        "<h3>Content</h3>" +
-        "<p>content?</p>" +
-        "</div>"
+      '<div id="dashboard" class="about">' +
+      content[dashboardCount] +
+      "</div>"
     );
     var timeDashboardOpened = Date.now();
 
@@ -436,9 +524,11 @@ var main = new (function () {
     });
     console.log(trackedData);
 
+    
+
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
-    );
+    )
 
     let $dialog = dialog("Dashboard", $body, $buttons);
 
@@ -451,6 +541,9 @@ var main = new (function () {
       console.log(trackedData);
       $dialog.close();
     });
+
+    document.getElementById("rightButton").addEventListener("click", increment)
+    document.getElementById("leftButton").addEventListener("click", decrement)
   };
 
   // idModal
@@ -1195,15 +1288,15 @@ var main = new (function () {
 
     function getPanelByNav(nav) {
       // the python module panels are all in the dict, look there first
-      // if (nav in self.pyModuleId2Panel) {
-      //   return self.pyModuleId2Panel[nav];
-      // } else if (nav == "navBlocks") {
-      //   return blocklyPanel;
-      // } else if (nav == "navPython") {
-      //   return pythonPanel;
-      // } else if (nav == "navSim") {
-      return simPanel;
-      // }
+      if (nav in self.pyModuleId2Panel) {
+        return self.pyModuleId2Panel[nav];
+      } else if (nav == "navBlocks") {
+        return blocklyPanel;
+      } else if (nav == "navPython") {
+        return pythonPanel;
+      } else if (nav == "navSim") {
+        return simPanel;
+      }
     }
 
     // when deleting a python module, inActiveNav and inActive will be undefined
