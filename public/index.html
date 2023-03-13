@@ -75,6 +75,7 @@
           <div class="menuItem helpMenu">Help</div>
           <div class="menuItem dashBoard">Dashboard</div>
           <div class="menuItem idModal">IDModal</div>
+          <div class="menuItem auth">Authorize</div>
         </div>
 
         <div class="panelControlsArea">
@@ -204,13 +205,17 @@
       /* exported handleSignoutClick */
 
       const CLIENT_ID =
-        "1032998752582-mi9shu3t7ii3qup4sdjriteegm2dn6ae.apps.googleusercontent.com";
+        "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
 
-      //"1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com"; //from https://console.developers.google.com/apis/credentials
+      // deployed: "1032998752582-mi9shu3t7ii3qup4sdjriteegm2dn6ae.apps.googleusercontent.com";
+
+      //localhost: "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com"; //from https://console.developers.google.com/apis/credentials
       //const API_KEY2 = "AIzaSyB0FuSAhDGLeXSr1TgjeWlMuZgcycKSthk"; //https://console.developers.google.com/apis/credentials
       const API_KEY = "AIzaSyB80SOar0yZzpo_A58ylaxmzi_N1OHZXkY";
 
-      const SPREADSHEET_ID = "1-kBpTFQva53vkmROoB6Z3Zq1GC0Q2aqM1BZ2I1gNkGc";
+      const SPREADSHEET_ID = "19qeecU0gOjoilW3suh4pRR-MI2gH_CfY1gDzU3ojaVc"; //test sheet
+
+      // Sheet1: "1-kBpTFQva53vkmROoB6Z3Zq1GC0Q2aqM1BZ2I1gNkGc";
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC =
         "https://sheets.googleapis.com/$discovery/rest?version=v4";
@@ -272,15 +277,17 @@
       /**
        *  Sign in the user upon button click.
        */
-      function handleAuthClick() {
+      function handleAuthClick(data) {
+        console.log("handleAuth data: " + data);
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
           }
           document.getElementById("signout_button").style.visibility =
             "visible";
-          document.getElementById("authorize_button").innerText = "Refresh";
-          await addRow();
+          document.getElementById("authorize_button").style.visibility =
+            "hidden";
+          await addRow(data);
         };
 
         if (gapi.client.getToken() === null) {
@@ -307,7 +314,16 @@
         }
       }
 
-      async function addRow() {
+      function formatTrackedData(data) {
+        let res = [];
+        data.map((obj) => res.push(obj.trigger.replace(/['"]+/g, "")));
+        return res;
+      }
+
+      async function addRow(data) {
+        console.log("addrow data: " + data);
+        let formattedData = formatTrackedData(data);
+        console.log("addrow formattedData: " + formattedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
           range: "Sheet1!A:B",
@@ -315,10 +331,7 @@
           insertDataOption: "INSERT_ROWS",
           resource: {
             majorDimension: "ROWS",
-            values: [
-              ["Row 1 Col 1", "Row 1 Col 2"],
-              ["Row 2 Col 1", "Row 2 Col 2"],
-            ],
+            values: [["Row 1 Col 1", "Row 1 Col 2"], formattedData],
           },
         };
 
