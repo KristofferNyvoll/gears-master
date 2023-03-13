@@ -62,6 +62,48 @@ var main = new (function () {
   // Create list of tuples with timestamp and keypress
   var trackedData = [];
 
+  const SPREADSHEET_ID = "19qeecU0gOjoilW3suh4pRR-MI2gH_CfY1gDzU3ojaVc"; //from the URL of your blank Google Sheet
+  const CLIENT_ID =
+    "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com"; //from https://console.developers.google.com/apis/credentials
+  //const API_KEY2 = "AIzaSyB0FuSAhDGLeXSr1TgjeWlMuZgcycKSthk"; //https://console.developers.google.com/apis/credentials
+  // const API_KEY = "AIzaSyB80SOar0yZzpo_A58ylaxmzi_N1OHZXkY";
+
+  /* appendValues
+  async function appendValues(
+        spreadsheetId,
+        range,
+        valueInputOption,
+        _values,
+        callback
+      ) {
+        let values = [
+          [new Date()],
+          // Additional rows ...
+        ];
+        values = _values;
+        const body = {
+          values: values,
+        };
+        try {
+          await gapi.client.sheets.spreadsheets.values
+            .append({
+              spreadsheetId: spreadsheetId,
+              range: range,
+              valueInputOption: valueInputOption,
+              resource: body,
+            })
+            .then((response) => {
+              const result = response.result;
+              console.log(`${result.updates.updatedCells} cells appended.`);
+              if (callback) callback(response);
+            });
+        } catch (err) {
+          document.getElementById("content").innerText = err.message;
+          return;
+        }
+      }
+
+  */
   // Update text already in html
   this.updateTextLanguage = function () {
     $("#navBlocks").text(i18n.get("#main-blocks#"));
@@ -449,6 +491,7 @@ var main = new (function () {
         trigger: "dashboardClosed",
       });
       console.log(trackedData);
+      //self.appendData
       $dialog.close();
     });
   };
