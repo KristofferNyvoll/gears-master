@@ -316,7 +316,10 @@
 
       function formatTrackedData(data) {
         let res = [];
-        data.map((obj) => res.push(obj.trigger.replace(/['"]+/g, "")));
+        data.map((obj) => {
+          let objParts = [obj.timestamp, obj.trigger.replace(/['"]+/g, "")];
+          res.push(...objParts);
+        });
         return res;
       }
 
@@ -326,12 +329,12 @@
         console.log("addrow formattedData: " + formattedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
-          range: "Sheet1!A:B",
+          range: "Sheet1",
           valueInputOption: "USER_ENTERED",
           insertDataOption: "INSERT_ROWS",
           resource: {
             majorDimension: "ROWS",
-            values: [["Row 1 Col 1", "Row 1 Col 2"], formattedData],
+            values: [formattedData],
           },
         };
 
