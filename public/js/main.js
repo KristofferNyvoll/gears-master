@@ -501,7 +501,6 @@ var main = new (function () {
       trigger: "dashboardIncremented",
     });
     renderDashboard();
-
     console.log(trackedData);
   }
 
@@ -537,39 +536,12 @@ var main = new (function () {
         trigger: "dashboardClosed",
       });
       console.log(trackedData);
-      //self.appendData
       $dialog.close();
     });
 
     document.getElementById("rightButton").addEventListener("click", increment);
     document.getElementById("leftButton").addEventListener("click", decrement);
   };
-
-  // idModal
-  this.openidModal = function () {
-    let $input = $('<input type="number">');
-    let $body = $(
-      '<div class="about">' +
-        "<div></div>" +
-        "<h3>This is the id modal</h3>" +
-        "<p>content?</p>" +
-        "</div>"
-    );
-
-    let $buttons = $(
-      '<button type="button" class="confirm btn-success">Ok</button>'
-    );
-    $body.append($input);
-
-    let $dialog = dialog("idModal", $body, $buttons);
-
-    $buttons.click(function () {
-      console.log($input.val());
-      $dialog.close();
-    });
-  };
-
-
 
   // Select robot from templates
   this.selectRobot = function () {
@@ -1339,9 +1311,9 @@ var main = new (function () {
   };
 
   function saveId() {
-    userId = document.getElementById("idField").value
-    console.log(userId)
-    handleAuthClick(trackedData)
+    userId = document.getElementById("idField").value;
+    console.log(userId);
+    handleAuthClick(trackedData);
   }
 
   let userId = 0;
@@ -1376,6 +1348,6 @@ var main = new (function () {
     };
     acknowledgeDialog(options);
   };
-
+})();
 // Init class
 main.init();

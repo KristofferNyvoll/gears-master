@@ -305,7 +305,7 @@
               if (callback) callback(response);
             });
         } catch (err) {
-          document.getElementById("content").innerText = err.message;
+          console.error(err.message);
           return;
         }
       }
