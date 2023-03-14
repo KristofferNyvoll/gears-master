@@ -414,23 +414,111 @@ var main = new (function () {
     }
   };
 
+  
+
   // Dashboard
+  let dashboardCount = 0
+  let content = [
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "bird" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton" disabled> <- </button>' +
+    '<button id="rightButton"> -> </button>',
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "is" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton"> <- </button>' +
+    '<button id="rightButton"> -> </button>',
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "the" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton"> <- </button>' +
+    '<button id="rightButton"> -> </button>',
+    "<div></div>" +
+    "<h3>This is the dashboard</h3>" +
+    "<p>Maybe we can do some design thinking magic here?</p>" +
+    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+    "<ul>" +
+    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+    "<li>Trinnvis veiledning med problemløsning</li>" +
+    "<li>osv</li>" +
+    "<li id='workings'>" + "word" + "</li>" +
+    "</ul>" +
+    "<h3>Content</h3>" +
+    "<p>content?</p>" +
+    '<button id="leftButton"> <- </button>' +
+    '<button id="rightButton" disabled> -> </button>'
+  ]
+
+  function decrement() {
+    if(dashboardCount > 0) dashboardCount--
+
+    var timeDashboardDecremented = Date.now();
+
+    trackedData.push({
+      timestamp: timeDashboardDecremented,
+      trigger: "dashboardDecremented",
+    });
+    renderDashboard()
+
+    console.log(trackedData);
+  }
+  
+  function increment() {
+    if(dashboardCount < 3) dashboardCount++
+
+    var timeDashboardIncremented = Date.now();
+
+    trackedData.push({
+      timestamp: timeDashboardIncremented,
+      trigger: "dashboardIncremented",
+    });
+    renderDashboard()
+    
+    console.log(trackedData);
+  }
+
+  function renderDashboard() {
+    let dashboard = document.getElementById("dashboard")
+    dashboard.innerHTML = content[dashboardCount]
+    document.getElementById("rightButton").addEventListener("click", increment)
+    document.getElementById("leftButton").addEventListener("click", decrement)
+  }
+  
+  
   this.openDashBoard = function () {
+
     let $body = $(
-      '<div class="about">' +
-        "<div></div>" +
-        "<h3>This is the dashboard</h3>" +
-        "<p>Maybe we can do some design thinking magic here?</p>" +
-        "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
-        "<ul>" +
-        "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-        "<li>Trinnvis veiledning med problemløsning</li>" +
-        "<li>osv</li>" +
-        "<li>osv</li>" +
-        "</ul>" +
-        "<h3>Content</h3>" +
-        "<p>content?</p>" +
-        "</div>"
+      '<div id="dashboard" class="about">' +
+      content[dashboardCount] +
+      "</div>"
     );
     var timeDashboardOpened = Date.now();
 
@@ -440,9 +528,11 @@ var main = new (function () {
     });
     console.log(trackedData);
 
+    
+
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
-    );
+    )
 
     let $dialog = dialog("Dashboard", $body, $buttons);
 
@@ -456,6 +546,9 @@ var main = new (function () {
       //self.appendData
       $dialog.close();
     });
+
+    document.getElementById("rightButton").addEventListener("click", increment)
+    document.getElementById("leftButton").addEventListener("click", decrement)
   };
 
   // idModal
@@ -1270,37 +1363,27 @@ var main = new (function () {
     acknowledgeDialog(options, function () {});
   };
 
+  function saveId() {
+    userId = document.getElementById("idField").value
+    console.log(userId)
+  }
+
+  let userId = 0
   // Display what's new if not seen before
   this.showWhatsNew = function (forceShow = false) {
     let current = 20220821;
-    let lastShown = localStorage.getItem("whatsNew");
-    if (lastShown == null || parseInt(lastShown) < current || forceShow) {
       let options = {
-        title: "What's New",
+        title: "Enter ID",
         message:
-          "<h3>21 Aug 2022 (Superpowered Complete!)</h3>" +
-          "<p>The FIRST Lego League 2022/2023 Superpowered missions are now complete.</p>" +
-          '<p>View a demo video <a href="https://youtu.be/-aoI6su6m84">on YouTube.</a></p>' +
-          "<h3>8 Aug 2022 (Superpowered)</h3>" +
-          "<p>Added the FIRST Lego League 2022/2023 Superpowered mission.</p>" +
-          "<p>" +
-          "It is incomplete for now, with only 4 out of 9 major mission models in place, but I will be adding to it over the coming days (...weeks?). " +
-          "If you would like to help, contact me to find out how." +
-          "</p>" +
-          "<h3>8 Aug 2022 (Challenges World)</h3>" +
-          "<p>" +
-          'A new "Challenges" world has been added. ' +
-          'It is using the new script loading system, so you will need to use this URL <a href="https://gears.aposteriori.com.sg/index.html?worldScripts=world_challenges">https://gears.aposteriori.com.sg/index.html?worldScripts=world_challenges</a> to access it.' +
-          "</p>" +
-          "<p>" +
-          'The "Challenges" world is designed for beginners, and consists of a series of basic coding challenges. ' +
-          'Educators who would like to create their own challenges should look at the <a href="https://github.com/QuirkyCort/gears/blob/master/public/js/worlds/extra/world_challenges.js">source code</a> to learn how.' +
-          "</p>",
+        "<label for='idField'>ID:</label>" +
+        "<input type='text' id='idField' name='idField'>" +
+        "<button id='idButton'> Enter </button>"
+        ,
       };
       acknowledgeDialog(options, function () {
         localStorage.setItem("whatsNew", current);
       });
-    }
+    document.getElementById("idButton").addEventListener("click", saveId)
   };
 
   // Display news
