@@ -510,7 +510,6 @@ var main = new (function () {
     document.getElementById("rightButton").addEventListener("click", increment);
     document.getElementById("leftButton").addEventListener("click", decrement);
   }
-
   this.openDashBoard = function () {
     let $body = $(
       '<div id="dashboard" class="about">' + content[dashboardCount] + "</div>"
@@ -1313,7 +1312,6 @@ var main = new (function () {
   function saveId() {
     userId = document.getElementById("idField").value;
     console.log(userId);
-    handleAuthClick(trackedData);
   }
 
   let userId = 0;
