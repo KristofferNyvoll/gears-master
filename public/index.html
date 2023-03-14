@@ -184,7 +184,6 @@
       /* exported gapiLoaded */
       /* exported gisLoaded */
       /* exported handleAuthClick */
-      /* exported handleSignoutClick */
 
       const CLIENT_ID =
         "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
@@ -238,12 +237,13 @@
       /**
        *  Sign in the user upon button click.
        */
-      function handleAuthClick(data) {
+      function handleAuthClick(data, id) {
+        console.log("handleAuth data: " + data);
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
           }
-          await addRow(data);
+          await addRow(data, id);
         };
 
         if (gapi.client.getToken() === null) {
@@ -256,20 +256,6 @@
         }
       }
 
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick() {
-        const token = gapi.client.getToken();
-        if (token !== null) {
-          google.accounts.oauth2.revoke(token.access_token);
-          gapi.client.setToken("");
-          document.getElementById("content").innerText = "";
-          document.getElementById("authorize_button").innerText = "Authorize";
-          document.getElementById("signout_button").style.visibility = "hidden";
-        }
-      }
-
       function formatTrackedData(data) {
         let res = [];
         data.map((obj) => {
@@ -279,13 +265,13 @@
         return res;
       }
 
-      async function addRow(data) {
+      async function addRow(data, id) {
         console.log("addrow data: " + data);
         let formattedData = formatTrackedData(data);
         console.log("addrow formattedData: " + formattedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
-          range: "Sheet1",
+          range: `Sheet${id}`,
           valueInputOption: "USER_ENTERED",
           insertDataOption: "INSERT_ROWS",
           resource: {
@@ -301,7 +287,6 @@
               console.log("request sent");
               const result = response.result;
               console.log(`${result.updates.updatedCells} cells appended.`);
-              if (callback) callback(response);
             });
         } catch (err) {
           console.error(err.message);
@@ -366,8 +351,7 @@
       // Init classes
       blockly.init();
       //main.init();
-      console.log("index");
-
+      
       function loadWorldFromGET() {
         let worldJSON = readGET("worldJSON");
         if (worldJSON) {
