@@ -507,6 +507,7 @@ var main = new (function () {
     document.getElementById("rightButton").addEventListener("click", increment);
     document.getElementById("leftButton").addEventListener("click", decrement);
   }
+
   this.openDashBoard = function () {
     let $body = $(
       '<div id="dashboard" class="about">' + content[dashboardCount] + "</div>"
