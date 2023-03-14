@@ -74,7 +74,6 @@
           <div class="menuItem worldsMenu">Worlds</div>
           <div class="menuItem helpMenu">Help</div> -->
           <div class="menuItem dashBoard">Dashboard</div>
-          <div class="menuItem auth">Authorize</div>
         </div>
 
         <div class="panelControlsArea">
@@ -222,7 +221,6 @@
           discoveryDocs: [DISCOVERY_DOC],
         });
         gapiInited = true;
-        maybeEnableButtons();
       }
 
       /**
@@ -246,8 +244,6 @@
           if (resp.error !== undefined) {
             throw resp;
           }
-          document.getElementById("authorize_button").style.visibility =
-            "hidden";
           await addRow(data, id);
         };
 

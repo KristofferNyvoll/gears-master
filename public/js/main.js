@@ -18,7 +18,6 @@ var main = new (function () {
     self.$helpMenu = $(".helpMenu");
     self.$dashBoard = $(".dashBoard");
     self.$idModal = $(".idModal");
-    self.$auth = $(".auth");
     self.$projectName = $("#projectName");
     self.$languageMenu = $(".language");
     // python icon controls
@@ -40,7 +39,6 @@ var main = new (function () {
     self.$helpMenu.click(self.toggleHelpMenu);
     self.$dashBoard.click(self.openDashBoard);
     self.$idModal.click(self.openidModal);
-    self.$auth.click(self.authorize);
     self.$languageMenu.click(self.toggleLanguageMenu);
     self.$newsButton.click(self.showNews);
 
@@ -75,7 +73,6 @@ var main = new (function () {
     self.$helpMenu.text(i18n.get("#main-help#"));
     self.$dashBoard.text(i18n.get("#main-dashboard#"));
     self.$idModal.text(i18n.get("#main-idModal#"));
-    self.$auth.text(i18n.get("#main-auth#"));
   };
 
   // Toggle language menu
@@ -572,26 +569,7 @@ var main = new (function () {
     });
   };
 
-  // auth
-  this.authorize = function () {
-    let $body = $(
-      '<div class="about">' +
-        "<h3>Authorize with a google account</h3>" +
-        "</div>"
-    );
 
-    let $buttons = $(
-      '<button type="button" class="confirm btn-success" id="authorize_button">Authorize</button>'
-    );
-
-    let $dialog = dialog("auth", $body, $buttons);
-
-    $buttons.click(function () {
-      console.log("auth btn clicked");
-      handleAuthClick(trackedData, userId);
-      $dialog.close();
-    });
-  };
 
   // Select robot from templates
   this.selectRobot = function () {
@@ -1361,8 +1339,9 @@ var main = new (function () {
   };
 
   function saveId() {
-    userId = document.getElementById("idField").value;
-    console.log(userId);
+    userId = document.getElementById("idField").value
+    console.log(userId)
+    handleAuthClick(trackedData)
   }
 
   let userId = 0;
@@ -1397,7 +1376,6 @@ var main = new (function () {
     };
     acknowledgeDialog(options);
   };
-})();
 
 // Init class
 main.init();
