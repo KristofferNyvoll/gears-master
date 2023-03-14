@@ -18,6 +18,7 @@ var main = new (function () {
     self.$helpMenu = $(".helpMenu");
     self.$dashBoard = $(".dashBoard");
     self.$idModal = $(".idModal");
+    self.$auth = $(".auth");
     self.$projectName = $("#projectName");
     self.$languageMenu = $(".language");
     // python icon controls
@@ -39,6 +40,7 @@ var main = new (function () {
     self.$helpMenu.click(self.toggleHelpMenu);
     self.$dashBoard.click(self.openDashBoard);
     self.$idModal.click(self.openidModal);
+    self.$auth.click(self.authorize);
     self.$languageMenu.click(self.toggleLanguageMenu);
     self.$newsButton.click(self.showNews);
 
@@ -64,6 +66,7 @@ var main = new (function () {
 
   // Update text already in html
   this.updateTextLanguage = function () {
+    console.log("inside updateTextLanguage");
     $("#navBlocks").text(i18n.get("#main-blocks#"));
     $("#navSim").text(i18n.get("#main-sim#"));
     self.$fileMenu.text(i18n.get("#main-file#"));
@@ -72,6 +75,7 @@ var main = new (function () {
     self.$helpMenu.text(i18n.get("#main-help#"));
     self.$dashBoard.text(i18n.get("#main-dashboard#"));
     self.$idModal.text(i18n.get("#main-idModal#"));
+    self.$auth.text(i18n.get("#main-auth#"));
   };
 
   // Toggle language menu
@@ -539,6 +543,7 @@ var main = new (function () {
         trigger: "dashboardClosed",
       });
       console.log(trackedData);
+      //self.appendData
       $dialog.close();
     });
 
@@ -566,6 +571,27 @@ var main = new (function () {
 
     $buttons.click(function () {
       console.log($input.val());
+      $dialog.close();
+    });
+  };
+
+  // auth
+  this.authorize = function () {
+    let $body = $(
+      '<div class="about">' +
+        "<h3>Authorize with a google account</h3>" +
+        "</div>"
+    );
+
+    let $buttons = $(
+      '<button type="button" class="confirm btn-success" id="authorize_button">Authorize</button>'
+    );
+
+    let $dialog = dialog("auth", $body, $buttons);
+
+    $buttons.click(function () {
+      console.log("auth btn clicked");
+      handleAuthClick(trackedData);
       $dialog.close();
     });
   };
