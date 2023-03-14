@@ -74,7 +74,6 @@
           <div class="menuItem worldsMenu">Worlds</div>
           <div class="menuItem helpMenu">Help</div> -->
           <div class="menuItem dashBoard">Dashboard</div>
-          <div class="menuItem auth">Authorize</div>
         </div>
 
         <div class="panelControlsArea">
@@ -222,7 +221,6 @@
           discoveryDocs: [DISCOVERY_DOC],
         });
         gapiInited = true;
-        maybeEnableButtons();
       }
 
       /**
@@ -241,13 +239,10 @@
        *  Sign in the user upon button click.
        */
       function handleAuthClick(data) {
-        console.log("handleAuth data: " + data);
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
           }
-          document.getElementById("authorize_button").style.visibility =
-            "hidden";
           await addRow(data);
         };
 
@@ -309,7 +304,7 @@
               if (callback) callback(response);
             });
         } catch (err) {
-          document.getElementById("content").innerText = err.message;
+          console.error(err.message);
           return;
         }
       }
@@ -371,7 +366,7 @@
       // Init classes
       blockly.init();
       //main.init();
-      console.log("index")
+      console.log("index");
 
       function loadWorldFromGET() {
         let worldJSON = readGET("worldJSON");
@@ -422,7 +417,7 @@
             loadScript("js/worlds/extra/" + script + ".js?v=" + Date.now())
           );
         }
-        console.log("loadWS")
+        console.log("loadWS");
         return Promise.all(scriptsPromises);
       }
 

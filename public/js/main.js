@@ -18,7 +18,6 @@ var main = new (function () {
     self.$helpMenu = $(".helpMenu");
     self.$dashBoard = $(".dashBoard");
     self.$idModal = $(".idModal");
-    self.$auth = $(".auth");
     self.$projectName = $("#projectName");
     self.$languageMenu = $(".language");
     // python icon controls
@@ -40,7 +39,6 @@ var main = new (function () {
     self.$helpMenu.click(self.toggleHelpMenu);
     self.$dashBoard.click(self.openDashBoard);
     self.$idModal.click(self.openidModal);
-    self.$auth.click(self.authorize);
     self.$languageMenu.click(self.toggleLanguageMenu);
     self.$newsButton.click(self.showNews);
 
@@ -75,7 +73,6 @@ var main = new (function () {
     self.$helpMenu.text(i18n.get("#main-help#"));
     self.$dashBoard.text(i18n.get("#main-dashboard#"));
     self.$idModal.text(i18n.get("#main-idModal#"));
-    self.$auth.text(i18n.get("#main-auth#"));
   };
 
   // Toggle language menu
@@ -414,71 +411,77 @@ var main = new (function () {
     }
   };
 
-  
-
   // Dashboard
-  let dashboardCount = 0
+  let dashboardCount = 0;
   let content = [
     "<div></div>" +
-    "<h3>This is the dashboard</h3>" +
-    "<p>Maybe we can do some design thinking magic here?</p>" +
-    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
-    "<ul>" +
-    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-    "<li>Trinnvis veiledning med problemløsning</li>" +
-    "<li>osv</li>" +
-    "<li id='workings'>" + "bird" + "</li>" +
-    "</ul>" +
-    "<h3>Content</h3>" +
-    "<p>content?</p>" +
-    '<button id="leftButton" disabled> <- </button>' +
-    '<button id="rightButton"> -> </button>',
+      "<h3>This is the dashboard</h3>" +
+      "<p>Maybe we can do some design thinking magic here?</p>" +
+      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<ul>" +
+      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+      "<li>Trinnvis veiledning med problemløsning</li>" +
+      "<li>osv</li>" +
+      "<li id='workings'>" +
+      "bird" +
+      "</li>" +
+      "</ul>" +
+      "<h3>Content</h3>" +
+      "<p>content?</p>" +
+      '<button id="leftButton" disabled> <- </button>' +
+      '<button id="rightButton"> -> </button>',
     "<div></div>" +
-    "<h3>This is the dashboard</h3>" +
-    "<p>Maybe we can do some design thinking magic here?</p>" +
-    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
-    "<ul>" +
-    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-    "<li>Trinnvis veiledning med problemløsning</li>" +
-    "<li>osv</li>" +
-    "<li id='workings'>" + "is" + "</li>" +
-    "</ul>" +
-    "<h3>Content</h3>" +
-    "<p>content?</p>" +
-    '<button id="leftButton"> <- </button>' +
-    '<button id="rightButton"> -> </button>',
+      "<h3>This is the dashboard</h3>" +
+      "<p>Maybe we can do some design thinking magic here?</p>" +
+      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<ul>" +
+      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+      "<li>Trinnvis veiledning med problemløsning</li>" +
+      "<li>osv</li>" +
+      "<li id='workings'>" +
+      "is" +
+      "</li>" +
+      "</ul>" +
+      "<h3>Content</h3>" +
+      "<p>content?</p>" +
+      '<button id="leftButton"> <- </button>' +
+      '<button id="rightButton"> -> </button>',
     "<div></div>" +
-    "<h3>This is the dashboard</h3>" +
-    "<p>Maybe we can do some design thinking magic here?</p>" +
-    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
-    "<ul>" +
-    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-    "<li>Trinnvis veiledning med problemløsning</li>" +
-    "<li>osv</li>" +
-    "<li id='workings'>" + "the" + "</li>" +
-    "</ul>" +
-    "<h3>Content</h3>" +
-    "<p>content?</p>" +
-    '<button id="leftButton"> <- </button>' +
-    '<button id="rightButton"> -> </button>',
+      "<h3>This is the dashboard</h3>" +
+      "<p>Maybe we can do some design thinking magic here?</p>" +
+      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<ul>" +
+      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+      "<li>Trinnvis veiledning med problemløsning</li>" +
+      "<li>osv</li>" +
+      "<li id='workings'>" +
+      "the" +
+      "</li>" +
+      "</ul>" +
+      "<h3>Content</h3>" +
+      "<p>content?</p>" +
+      '<button id="leftButton"> <- </button>' +
+      '<button id="rightButton"> -> </button>',
     "<div></div>" +
-    "<h3>This is the dashboard</h3>" +
-    "<p>Maybe we can do some design thinking magic here?</p>" +
-    "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
-    "<ul>" +
-    "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-    "<li>Trinnvis veiledning med problemløsning</li>" +
-    "<li>osv</li>" +
-    "<li id='workings'>" + "word" + "</li>" +
-    "</ul>" +
-    "<h3>Content</h3>" +
-    "<p>content?</p>" +
-    '<button id="leftButton"> <- </button>' +
-    '<button id="rightButton" disabled> -> </button>'
-  ]
+      "<h3>This is the dashboard</h3>" +
+      "<p>Maybe we can do some design thinking magic here?</p>" +
+      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<ul>" +
+      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
+      "<li>Trinnvis veiledning med problemløsning</li>" +
+      "<li>osv</li>" +
+      "<li id='workings'>" +
+      "word" +
+      "</li>" +
+      "</ul>" +
+      "<h3>Content</h3>" +
+      "<p>content?</p>" +
+      '<button id="leftButton"> <- </button>' +
+      '<button id="rightButton" disabled> -> </button>',
+  ];
 
   function decrement() {
-    if(dashboardCount > 0) dashboardCount--
+    if (dashboardCount > 0) dashboardCount--;
 
     var timeDashboardDecremented = Date.now();
 
@@ -486,13 +489,13 @@ var main = new (function () {
       timestamp: timeDashboardDecremented,
       trigger: "dashboardDecremented",
     });
-    renderDashboard()
+    renderDashboard();
 
     console.log(trackedData);
   }
-  
+
   function increment() {
-    if(dashboardCount < 3) dashboardCount++
+    if (dashboardCount < 3) dashboardCount++;
 
     var timeDashboardIncremented = Date.now();
 
@@ -500,25 +503,20 @@ var main = new (function () {
       timestamp: timeDashboardIncremented,
       trigger: "dashboardIncremented",
     });
-    renderDashboard()
-    
+    renderDashboard();
     console.log(trackedData);
   }
 
   function renderDashboard() {
-    let dashboard = document.getElementById("dashboard")
-    dashboard.innerHTML = content[dashboardCount]
-    document.getElementById("rightButton").addEventListener("click", increment)
-    document.getElementById("leftButton").addEventListener("click", decrement)
+    let dashboard = document.getElementById("dashboard");
+    dashboard.innerHTML = content[dashboardCount];
+    document.getElementById("rightButton").addEventListener("click", increment);
+    document.getElementById("leftButton").addEventListener("click", decrement);
   }
-  
-  
-  this.openDashBoard = function () {
 
+  this.openDashBoard = function () {
     let $body = $(
-      '<div id="dashboard" class="about">' +
-      content[dashboardCount] +
-      "</div>"
+      '<div id="dashboard" class="about">' + content[dashboardCount] + "</div>"
     );
     var timeDashboardOpened = Date.now();
 
@@ -528,11 +526,9 @@ var main = new (function () {
     });
     console.log(trackedData);
 
-    
-
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
-    )
+    );
 
     let $dialog = dialog("Dashboard", $body, $buttons);
 
@@ -543,57 +539,11 @@ var main = new (function () {
         trigger: "dashboardClosed",
       });
       console.log(trackedData);
-      //self.appendData
       $dialog.close();
     });
 
-    document.getElementById("rightButton").addEventListener("click", increment)
-    document.getElementById("leftButton").addEventListener("click", decrement)
-  };
-
-  // idModal
-  this.openidModal = function () {
-    let $input = $('<input type="number">');
-    let $body = $(
-      '<div class="about">' +
-        "<div></div>" +
-        "<h3>This is the id modal</h3>" +
-        "<p>content?</p>" +
-        "</div>"
-    );
-
-    let $buttons = $(
-      '<button type="button" class="confirm btn-success">Ok</button>'
-    );
-    $body.append($input);
-
-    let $dialog = dialog("idModal", $body, $buttons);
-
-    $buttons.click(function () {
-      console.log($input.val());
-      $dialog.close();
-    });
-  };
-
-  // auth
-  this.authorize = function () {
-    let $body = $(
-      '<div class="about">' +
-        "<h3>Authorize with a google account</h3>" +
-        "</div>"
-    );
-
-    let $buttons = $(
-      '<button type="button" class="confirm btn-success" id="authorize_button">Authorize</button>'
-    );
-
-    let $dialog = dialog("auth", $body, $buttons);
-
-    $buttons.click(function () {
-      console.log("auth btn clicked");
-      handleAuthClick(trackedData);
-      $dialog.close();
-    });
+    document.getElementById("rightButton").addEventListener("click", increment);
+    document.getElementById("leftButton").addEventListener("click", decrement);
   };
 
   // Select robot from templates
@@ -1364,26 +1314,26 @@ var main = new (function () {
   };
 
   function saveId() {
-    userId = document.getElementById("idField").value
-    console.log(userId)
+    userId = document.getElementById("idField").value;
+    console.log(userId);
+    handleAuthClick(trackedData);
   }
 
-  let userId = 0
+  let userId = 0;
   // Display what's new if not seen before
   this.showWhatsNew = function (forceShow = false) {
     let current = 20220821;
-      let options = {
-        title: "Enter ID",
-        message:
+    let options = {
+      title: "Enter ID",
+      message:
         "<label for='idField'>ID:</label>" +
         "<input type='text' id='idField' name='idField'>" +
-        "<button id='idButton'> Enter </button>"
-        ,
-      };
-      acknowledgeDialog(options, function () {
-        localStorage.setItem("whatsNew", current);
-      });
-    document.getElementById("idButton").addEventListener("click", saveId)
+        "<button id='idButton'> Enter </button>",
+    };
+    acknowledgeDialog(options, function () {
+      localStorage.setItem("whatsNew", current);
+    });
+    document.getElementById("idButton").addEventListener("click", saveId);
   };
 
   // Display news
