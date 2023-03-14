@@ -102,17 +102,6 @@
         </div>
 
         <div class="panel" aria-labelledby="navSim" id="simPanel">
-          <div class="sheets">
-            <!--Add buttons to initiate auth sequence and sign out-->
-            <button id="authorize_button" onclick="handleAuthClick()">
-              Authorize
-            </button>
-            <button id="signout_button" onclick="handleSignoutClick()">
-              Sign Out
-            </button>
-
-            <pre id="content" style="white-space: pre-wrap"></pre>
-          </div>
           <canvas id="renderCanvas" touch-action="none"></canvas>
           <div class="runSim"><span class="icon-play"></span></div>
           <div class="world"><span class="icon-globe"></span></div>
@@ -193,11 +182,6 @@
       </div>
     </main>
 
-    <!-- <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/google-spreadsheet@3.3.0/index.min.js"
-    ></script> -->
-
     <script type="text/javascript">
       /* exported gapiLoaded */
       /* exported gisLoaded */
@@ -206,16 +190,10 @@
 
       const CLIENT_ID =
         "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
-
-      // deployed: "1032998752582-mi9shu3t7ii3qup4sdjriteegm2dn6ae.apps.googleusercontent.com";
-
-      //localhost: "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com"; //from https://console.developers.google.com/apis/credentials
-      //const API_KEY2 = "AIzaSyB0FuSAhDGLeXSr1TgjeWlMuZgcycKSthk"; //https://console.developers.google.com/apis/credentials
       const API_KEY = "AIzaSyB80SOar0yZzpo_A58ylaxmzi_N1OHZXkY";
 
       const SPREADSHEET_ID = "19qeecU0gOjoilW3suh4pRR-MI2gH_CfY1gDzU3ojaVc"; //test sheet
 
-      // Sheet1: "1-kBpTFQva53vkmROoB6Z3Zq1GC0Q2aqM1BZ2I1gNkGc";
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC =
         "https://sheets.googleapis.com/$discovery/rest?version=v4";
@@ -227,9 +205,6 @@
       let tokenClient;
       let gapiInited = false;
       let gisInited = false;
-
-      document.getElementById("authorize_button").style.visibility = "hidden";
-      document.getElementById("signout_button").style.visibility = "hidden";
 
       /**
        * Callback after api.js is loaded.
@@ -261,17 +236,6 @@
           callback: "", // defined later
         });
         gisInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Enables user interaction after all libraries are loaded.
-       */
-      function maybeEnableButtons() {
-        if (gapiInited && gisInited) {
-          document.getElementById("authorize_button").style.visibility =
-            "visible";
-        }
       }
 
       /**
@@ -283,8 +247,6 @@
           if (resp.error !== undefined) {
             throw resp;
           }
-          document.getElementById("signout_button").style.visibility =
-            "visible";
           document.getElementById("authorize_button").style.visibility =
             "hidden";
           await addRow(data);
