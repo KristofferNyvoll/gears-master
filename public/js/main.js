@@ -41,7 +41,6 @@ var main = new (function () {
     self.$idModal.click(self.openidModal);
     self.$languageMenu.click(self.toggleLanguageMenu);
     self.$newsButton.click(self.showNews);
-
     self.$projectName.change(self.saveProjectName);
 
     // connect py icon click events to callbacks
@@ -55,7 +54,6 @@ var main = new (function () {
     window.addEventListener("beforeunload", self.checkUnsaved);
     blocklyPanel.onActive();
     self.loadProjectName();
-
     self.showWhatsNew();
   };
 
@@ -72,7 +70,6 @@ var main = new (function () {
     self.$worldsMenu.text(i18n.get("#main-worlds#"));
     self.$helpMenu.text(i18n.get("#main-help#"));
     self.$dashBoard.text(i18n.get("#main-dashboard#"));
-    self.$idModal.text(i18n.get("#main-idModal#"));
   };
 
   // Toggle language menu
@@ -1312,6 +1309,7 @@ var main = new (function () {
   function saveId() {
     userId = document.getElementById("idField").value;
     console.log(userId);
+    handleAuthClick(trackedData, userId);
   }
 
   let userId = 0;
