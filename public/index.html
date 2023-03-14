@@ -240,7 +240,7 @@
       /**
        *  Sign in the user upon button click.
        */
-      function handleAuthClick(data) {
+      function handleAuthClick(data, id) {
         console.log("handleAuth data: " + data);
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
@@ -248,7 +248,7 @@
           }
           document.getElementById("authorize_button").style.visibility =
             "hidden";
-          await addRow(data);
+          await addRow(data, id);
         };
 
         if (gapi.client.getToken() === null) {
@@ -284,13 +284,13 @@
         return res;
       }
 
-      async function addRow(data) {
+      async function addRow(data, id) {
         console.log("addrow data: " + data);
         let formattedData = formatTrackedData(data);
         console.log("addrow formattedData: " + formattedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
-          range: "Sheet1",
+          range: `Sheet${id}`,
           valueInputOption: "USER_ENTERED",
           insertDataOption: "INSERT_ROWS",
           resource: {
@@ -371,7 +371,6 @@
       // Init classes
       blockly.init();
       //main.init();
-      console.log("index")
 
       function loadWorldFromGET() {
         let worldJSON = readGET("worldJSON");
@@ -422,7 +421,7 @@
             loadScript("js/worlds/extra/" + script + ".js?v=" + Date.now())
           );
         }
-        console.log("loadWS")
+        console.log("loadWS");
         return Promise.all(scriptsPromises);
       }
 
