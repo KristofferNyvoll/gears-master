@@ -408,68 +408,55 @@ var main = new (function () {
   // Dashboard
   let dashboardCount = 0;
   let content = [
+    // DB 1
     "<div></div>" +
-      "<h3>This is the dashboard</h3>" +
-      "<p>Maybe we can do some design thinking magic here?</p>" +
-      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<h3>Idemyldring</h3>" +
+      "<p>Dagens oppgave handler om brannredning og brannsikkerhet. Dette programmet har en enkel robotsimulering som dere skal utforske. Der vil det være 7 brikker inne i en brennende butikk som en robot skal redde. Tre av disse er røde, og 4 er grønne. De røde brikkene forsvinner etter 4 minutter, for å simulere at disse er mer tidskritiske å få ut av bygget.</p>" +
+      "<p>Skriv ned alt dere tenker om:</p>" +
       "<ul>" +
-      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-      "<li>Trinnvis veiledning med problemløsning</li>" +
-      "<li>osv</li>" +
-      "<li id='workings'>" +
-      "bird" +
-      "</li>" +
+      "<li>Hva kan gå galt under en brannredning?</li>" +
+      "<li>Hvilke steg tror dere det er i en vanlig brannredning?</li>" +
+      "<li>Hva vil være viktig å tenke på i en situasjon hvor en robot skal redde personer i en brannsituasjon?</li>" +
       "</ul>" +
-      "<h3>Content</h3>" +
-      "<p>content?</p>" +
+      "<p>Skriv ned alt dere tenker! Ingenting er feil - vi skal ikke teste dere, bare programmet. </p>" +
       '<button id="leftButton" disabled> <- </button>' +
       '<button id="rightButton"> -> </button>',
+    // DB 2
     "<div></div>" +
-      "<h3>This is the dashboard</h3>" +
-      "<p>Maybe we can do some design thinking magic here?</p>" +
-      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<h3>Utforskning</h3>" +
+      "<p>Nå som dere har idemyldret litt rundt hvordan brannredning fungerer, skal vi gå videre til å utforske roboten:</p>" +
       "<ul>" +
-      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-      "<li>Trinnvis veiledning med problemløsning</li>" +
-      "<li>osv</li>" +
-      "<li id='workings'>" +
-      "is" +
-      "</li>" +
+      "<li>Hvordan fungerer styring av roboten?</li>" +
+      "<li>Hvordan er banen/verdenen roboten må navigere seg rundt i?</li>" +
+      "<li>Hvilke funksjoner/verktøy ville det vært nyttig for roboten å ha?</li>" +
+      "<li>Hvordan burde en slik brannredningsrobot styres i virkeligheten?</li>" +
+      "<li>Hva skal til for at en robot kan gjennomføre sikker og effektiv brannredning?</li>" +
+      "<li>Hvilke problemer med menneskelig brannredning kan en robot løse?</li>" +
       "</ul>" +
-      "<h3>Content</h3>" +
-      "<p>content?</p>" +
       '<button id="leftButton"> <- </button>' +
       '<button id="rightButton"> -> </button>',
+    // DB 3
     "<div></div>" +
-      "<h3>This is the dashboard</h3>" +
-      "<p>Maybe we can do some design thinking magic here?</p>" +
-      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<h3>Informasjonssamling</h3>" +
+      "<p>Nå har dere tenkt litt over ulike aspekter ved brannredning og bruk av robot.</p>" +
+      "<p>Neste steg er å samle inn mer informasjon for å vurdere ideene. </p>" +
       "<ul>" +
-      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-      "<li>Trinnvis veiledning med problemløsning</li>" +
-      "<li>osv</li>" +
-      "<li id='workings'>" +
-      "the" +
-      "</li>" +
+      "<li>Hvilken informasjon er nødvendig for å vurdere ideene?</li>" +
+      "<li>Hva skal til for at de ulike ideene kan gjennomføres?</li>" +
+      "<li>Er det noen av ideene som er mer realistiske enn andre?</li>" +
       "</ul>" +
-      "<h3>Content</h3>" +
-      "<p>content?</p>" +
       '<button id="leftButton"> <- </button>' +
       '<button id="rightButton"> -> </button>',
+    // DB 4
     "<div></div>" +
-      "<h3>This is the dashboard</h3>" +
-      "<p>Maybe we can do some design thinking magic here?</p>" +
-      "<p>Her kan vi hjelpe elevene med bl.a:</p>" +
+      "<h3>Definere konkrete forslag</h3>" +
+      "<p>Dette er siste del - nå skal dere prøve å konkretisere ideene som har kommet opp i løpet av de tidligere stegene.</p>" +
+      "<p>Hvis dere skulle designet og utviklet en brannredningsrobot, hvilke hadde dere prioritert høyest? Hvorfor?</p>" +
       "<ul>" +
-      "<li>Gjøre design thinking uten at de vet det selv hehe</li>" +
-      "<li>Trinnvis veiledning med problemløsning</li>" +
-      "<li>osv</li>" +
-      "<li id='workings'>" +
-      "word" +
-      "</li>" +
+      "<li>Hvilke endringer skal til for å gjøre denne roboten nyttig?</li>" +
+      "<li>Hvilke problemer løser disse endringene?</li>" +
       "</ul>" +
-      "<h3>Content</h3>" +
-      "<p>content?</p>" +
+      "<p>Definer 3-5 konkrete forslag til hva som kan endre/forbedre roboten</p>" +
       '<button id="leftButton"> <- </button>' +
       '<button id="rightButton" disabled> -> </button>',
   ];
@@ -484,8 +471,6 @@ var main = new (function () {
       trigger: "dashboardDecremented",
     });
     renderDashboard();
-
-    console.log(trackedData);
   }
 
   function increment() {
@@ -498,7 +483,6 @@ var main = new (function () {
       trigger: "dashboardIncremented",
     });
     renderDashboard();
-    console.log(trackedData);
   }
 
   function renderDashboard() {
