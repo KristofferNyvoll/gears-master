@@ -238,7 +238,6 @@
        *  Sign in the user upon button click.
        */
       function handleAuthClick(data, id) {
-        console.log("handleAuth data: " + data);
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
@@ -266,9 +265,7 @@
       }
 
       async function addRow(data, id) {
-        console.log("addrow data: " + data);
         let formattedData = formatTrackedData(data);
-        console.log("addrow formattedData: " + formattedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
           range: `Sheet${id}`,
@@ -284,7 +281,6 @@
           await gapi.client.sheets.spreadsheets.values
             .append(request)
             .then((response) => {
-              console.log("request sent");
               const result = response.result;
               console.log(`${result.updates.updatedCells} cells appended.`);
             });
@@ -351,7 +347,7 @@
       // Init classes
       blockly.init();
       //main.init();
-      
+
       function loadWorldFromGET() {
         let worldJSON = readGET("worldJSON");
         if (worldJSON) {
