@@ -54,7 +54,7 @@ var main = new (function () {
     window.addEventListener("beforeunload", self.checkUnsaved);
     blocklyPanel.onActive();
     self.loadProjectName();
-    self.showWhatsNew();
+    self.splash();
   };
 
   // Create list of tuples with timestamp and keypress
@@ -373,7 +373,7 @@ var main = new (function () {
           html: i18n.get("#main-whats_new#"),
           line: false,
           callback: function () {
-            self.showWhatsNew(true);
+            self.splash(true);
           },
         },
         {
@@ -1307,15 +1307,18 @@ var main = new (function () {
     acknowledgeDialog(options, function () {});
   };
 
-  function saveId() {
+  async function saveId() {
     userId = document.getElementById("idField").value;
-    console.log(userId);
-    handleAuthClick(trackedData, userId);
+    await handleAuthClick(trackedData, userId);
+    setInterval(async function () {
+      await addRow(trackedData, userId);
+    }, 300000); // every 5 minutes
+    //clearInterval(interval);
   }
 
   let userId = 0;
   // Display what's new if not seen before
-  this.showWhatsNew = function (forceShow = false) {
+  this.splash = function (forceShow = false) {
     let current = 20220821;
     let options = {
       title: "Enter ID",
