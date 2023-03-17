@@ -62,7 +62,6 @@ var main = new (function () {
 
   // Update text already in html
   this.updateTextLanguage = function () {
-    console.log("inside updateTextLanguage");
     $("#navBlocks").text(i18n.get("#main-blocks#"));
     $("#navSim").text(i18n.get("#main-sim#"));
     self.$fileMenu.text(i18n.get("#main-file#"));
@@ -278,7 +277,6 @@ var main = new (function () {
     (event) => {
       var code = event.code;
       trackedData.push({ timestamp: Date.now(), trigger: code });
-      console.log(trackedData);
     },
     false
   );
@@ -331,7 +329,6 @@ var main = new (function () {
     let $dialog = dialog("About", $body, $buttons);
 
     $buttons.click(function () {
-      console.log("f");
       $dialog.close();
     });
   };
@@ -1294,8 +1291,12 @@ var main = new (function () {
   async function saveId() {
     userId = document.getElementById("idField").value;
     await handleAuthClick(trackedData, userId);
+    let prevData;
     setInterval(async function () {
-      await addRow(trackedData, userId);
+      if (prevData != trackedData) {
+        await addRow(trackedData, userId);
+        prevData = trackedData;
+      }
     }, 300000); // every 5 minutes
     //clearInterval(interval);
   }
