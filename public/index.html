@@ -50,9 +50,9 @@
     <main>
       <nav>
         <ul class="panelTabs">
-          <!-- <li id="navBlocks" class="active">Blocks</li> -->
+          <li id="navBlocks" class="active">Blocks</li>
           <li id="navPython" class="pythonMain">
-            <!-- <span> Python </span>
+            <span> Python </span>
             <span class="py-mod-controls">
               <i
                 class="icon-upload upload-py-mod"
@@ -63,16 +63,16 @@
                 title="Download python main"
               ></i>
               <i class="icon-newFile add-py-mod" title="Add python module"></i>
-            </span> -->
+            </span>
           </li>
           <li id="navSim">Simulator</li>
         </ul>
         <div class="menuBar">
-          <!-- <div class="menuItem fileMenu">File</div>
+          <div class="menuItem fileMenu">File</div>
           <div class="menuItem pythonMenu">Python</div>
           <div class="menuItem robotMenu">Robot</div>
           <div class="menuItem worldsMenu">Worlds</div>
-          <div class="menuItem helpMenu">Help</div> -->
+          <div class="menuItem helpMenu">Help</div>
           <div class="menuItem dashBoard">Dashboard</div>
         </div>
 
@@ -305,7 +305,7 @@
     <script src="blockly/3.20200402.1/blockly.js"></script>
     <script src="blockly/3.20200402.1/blocks.js"></script>
     <script src="blockly/3.20200402.1/python.js"></script>
-    <!-- <script src="blockly/3.20200402.1/msg/en.js"></script> -->
+    <script src="blockly/3.20200402.1/msg/en.js"></script>
 
     <script src="js/ev3dev2_generator.js?v=c7ad811b"></script>
     <script src="js/pybricks_generator.js?v=13a33c1a"></script>
@@ -346,7 +346,6 @@
     <script>
       // Init classes
       blockly.init();
-      //main.init();
 
       function loadWorldFromGET() {
         let worldJSON = readGET("worldJSON");
