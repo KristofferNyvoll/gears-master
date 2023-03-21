@@ -168,6 +168,7 @@ var simPanel = new function() {
     });
 
     function resetJoystick(e) {
+      addTrackedData("resetJoystick")
       self.$virtualJoystickIndicator[0].style.left = '0px';
       self.$virtualJoystickIndicator[0].style.top = '0px';
       stop();
@@ -295,6 +296,7 @@ var simPanel = new function() {
 
   // Toggle virtual joystick
   this.toggleJoystick = function() {
+    addTrackedData("toggleJoystick")
     self.$joystick.toggleClass('closed');
   };
 
@@ -318,6 +320,7 @@ var simPanel = new function() {
     function setBtn(key, state) {
       return function(evt) {
         if (state) {
+          addTrackedData("hubButton" + key)
           evt.target.classList.add('pressed');
         } else {
           evt.target.classList.remove('pressed');
@@ -335,11 +338,13 @@ var simPanel = new function() {
 
   // Toggle hub buttons
   this.toggleHubButtons = function() {
+    addTrackedData("toggleHubButtons")
     self.$hubButtons.toggleClass('closed');
   };
 
   // toggle ruler
   this.toggleRuler = function() {
+    addTrackedData("toggleRuler")
     if (self.$ruler.hasClass('closed')) {
       self.$ruler.removeClass('closed');
       self.rulerState = 1;
@@ -659,6 +664,7 @@ var simPanel = new function() {
 
   // toggle sensors panel
   this.toggleSensorsPanel = function() {
+    addTrackedData("toggleSensorPanel")
     if (self.sensors.length == 0) {
       self.initSensorsPanel();
     }
@@ -670,19 +676,23 @@ var simPanel = new function() {
     if (e.currentTarget.classList.contains('cameraArc')) {
       babylon.setCameraMode('arc');
       self.$camera.html('<span class="icon-cameraArc"></span>');
+      addTrackedData("switchCameraArc")
 
     } else if (e.currentTarget.classList.contains('cameraFollow')) {
       babylon.setCameraMode('follow');
       self.$camera.html('<span class="icon-cameraFollow"></span>');
+      addTrackedData("switchCameraFollow")
 
     } else if (e.currentTarget.classList.contains('cameraTop')) {
       babylon.setCameraMode('orthoTop');
       self.$camera.html('<span class="icon-cameraTop"></span>');
+      addTrackedData("switchCameraOrtho")
 
     } else if (e.currentTarget.classList.contains('resetCamera')) {
       babylon.resetCamera();
       babylon.setCameraMode('follow');
       self.$camera.html('<span class="icon-cameraFollow"></span>');
+      addTrackedData("switchCameraReset")
     }
 
     self.$cameraSelector.addClass('closed');
@@ -690,6 +700,7 @@ var simPanel = new function() {
 
   // Toggle camera selector
   this.toggleCameraSelector = function() {
+    addTrackedData("toggleCameraSelector")
     let current = self.$camera.children()[0].className.replace('icon-', '');
     self.$cameraSelector.children().removeClass('hide');
     self.$cameraSelector.find('.' + current).addClass('hide');
@@ -1125,6 +1136,8 @@ var simPanel = new function() {
 
   // Stop the simulator
   this.stopSim = function(stopRobot) {
+    addTrackedData("stopSimulator")
+
     if (typeof stopRobot == 'undefined') {
       let stopRobot = false;
     }
@@ -1150,6 +1163,8 @@ var simPanel = new function() {
 
   // Run the simulator
   this.runSim = function() {
+    addTrackedData("runSimulator")
+
     if (skulpt.running) {
       self.stopSim();
     } else {
@@ -1176,6 +1191,7 @@ var simPanel = new function() {
 
   // Reset simulator
   this.resetSim = function(resetPython) {
+    addTrackedData("resetSimulator")
     if (typeof resetPython == 'undefined') {
       resetPython = true;
     }

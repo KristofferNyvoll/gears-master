@@ -199,6 +199,10 @@
       console.log(trackedData)
       }
 
+      document.getElementById("navBlocks").addEventListener("click", () => addTrackedData("BlocksPanelClicked"))
+      document.getElementById("navPython").addEventListener("click", () => addTrackedData("PythonPanelClicked"))
+      document.getElementById("navSim").addEventListener("click", () => addTrackedData("SimPanelClicked"))
+
       const CLIENT_ID =
         "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
       const API_KEY = "AIzaSyB80SOar0yZzpo_A58ylaxmzi_N1OHZXkY";
