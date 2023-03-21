@@ -185,6 +185,20 @@
       /* exported gisLoaded */
       /* exported handleAuthClick */
 
+      // Create list of tuples with timestamp and keypress
+
+      var userId
+      var trackedData = [];
+
+      function addTrackedData(trigger) {
+        var time = Date.now()
+        trackedData.push({
+        timestamp: time,
+        trigger: trigger,
+      });
+      console.log(trackedData)
+      }
+
       const CLIENT_ID =
         "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
       const API_KEY = "AIzaSyB80SOar0yZzpo_A58ylaxmzi_N1OHZXkY";
@@ -237,12 +251,13 @@
       /**
        *  Sign in the user upon button click.
        */
-      function handleAuthClick(data, id) {
+      function handleAuthClick(id) {
+        userId = id
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
           }
-          await addRow(data, id);
+          await addRow(id);
         };
 
         if (gapi.client.getToken() === null) {
@@ -264,11 +279,11 @@
         return res;
       }
 
-      async function addRow(data, id) {
-        let formattedData = formatTrackedData(data);
+      async function addRow() {
+        let formattedData = formatTrackedData(trackedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
-          range: `Sheet${id}`,
+          range: `Sheet${userId}`,
           valueInputOption: "USER_ENTERED",
           insertDataOption: "INSERT_ROWS",
           resource: {
