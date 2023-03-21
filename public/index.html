@@ -68,11 +68,11 @@
           <li id="navSim">Simulator</li>
         </ul>
         <div class="menuBar">
-          <div class="menuItem fileMenu">File</div>
-          <div class="menuItem pythonMenu">Python</div>
+          <!-- <div class="menuItem fileMenu">File</div>
+          <div class="menuItem pythonMenu">Python</div> -->
           <div class="menuItem robotMenu">Robot</div>
-          <div class="menuItem worldsMenu">Worlds</div>
-          <div class="menuItem helpMenu">Help</div>
+          <!-- <div class="menuItem worldsMenu">Worlds</div>
+          <div class="menuItem helpMenu">Help</div> -->
           <div class="menuItem dashBoard">Dashboard</div>
         </div>
 
@@ -257,7 +257,7 @@
           if (resp.error !== undefined) {
             throw resp;
           }
-          await addRow(id);
+          await addRow();
         };
 
         if (gapi.client.getToken() === null) {
