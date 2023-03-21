@@ -57,8 +57,7 @@ var main = new (function () {
     self.splash();
   };
 
-  // Create list of tuples with timestamp and keypress
-  var trackedData = [];
+
 
   // Update text already in html
   this.updateTextLanguage = function () {
@@ -276,7 +275,7 @@ var main = new (function () {
     "keyup",
     (event) => {
       var code = event.code;
-      trackedData.push({ timestamp: Date.now(), trigger: code });
+      addTrackedData(code)
     },
     false
   );
@@ -459,27 +458,19 @@ var main = new (function () {
   ];
 
   function decrement() {
-    if (dashboardCount > 0) dashboardCount--;
-
-    var timeDashboardDecremented = Date.now();
-
-    trackedData.push({
-      timestamp: timeDashboardDecremented,
-      trigger: "dashboardDecremented",
-    });
-    renderDashboard();
+    addTrackedData("dashboardDecremented")
+    if (dashboardCount > 0) {
+      dashboardCount--;
+      renderDashboard();
+    } 
   }
 
   function increment() {
-    if (dashboardCount < 3) dashboardCount++;
-
-    var timeDashboardIncremented = Date.now();
-
-    trackedData.push({
-      timestamp: timeDashboardIncremented,
-      trigger: "dashboardIncremented",
-    });
-    renderDashboard();
+    addTrackedData("dashboardIncremented")
+    if (dashboardCount < 3) {
+      dashboardCount++;
+      renderDashboard();
+    }
   }
 
   function renderDashboard() {
@@ -493,13 +484,7 @@ var main = new (function () {
     let $body = $(
       '<div id="dashboard" class="about">' + content[dashboardCount] + "</div>"
     );
-    var timeDashboardOpened = Date.now();
-
-    trackedData.push({
-      timestamp: timeDashboardOpened,
-      trigger: "dashboardOpened",
-    });
-    console.log(trackedData);
+    addTrackedData("dashboardOpened")
 
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
@@ -508,12 +493,7 @@ var main = new (function () {
     let $dialog = dialog("Dashboard", $body, $buttons);
 
     $buttons.click(function () {
-      const timeDashboardClosed = Date.now();
-      trackedData.push({
-        timestamp: timeDashboardClosed,
-        trigger: "dashboardClosed",
-      });
-      console.log(trackedData);
+      addTrackedData("dashboardClosed")
       $dialog.close();
     });
 
@@ -1290,13 +1270,9 @@ var main = new (function () {
 
   async function saveId() {
     userId = document.getElementById("idField").value;
-    await handleAuthClick(trackedData, userId);
-    let prevData;
+    await handleAuthClick(userId);
     setInterval(async function () {
-      if (prevData != trackedData) {
-        await addRow(trackedData, userId);
-        prevData = trackedData;
-      }
+      await addRow();
     }, 300000); // every 5 minutes
     //clearInterval(interval);
   }
