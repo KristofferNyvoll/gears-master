@@ -71,8 +71,8 @@
           <!-- <div class="menuItem fileMenu">File</div>
           <div class="menuItem pythonMenu">Python</div> -->
           <div class="menuItem robotMenu">Robot</div>
-          <!-- <div class="menuItem worldsMenu">Worlds</div>
-          <div class="menuItem helpMenu">Help</div> -->
+          <div class="menuItem worldsMenu">Worlds</div>
+          <!-- <div class="menuItem helpMenu">Help</div> -->
           <div class="menuItem dashBoard">Dashboard</div>
         </div>
 
@@ -187,21 +187,27 @@
 
       // Create list of tuples with timestamp and keypress
 
-      var userId
+      var userId;
       var trackedData = [];
 
       function addTrackedData(trigger) {
-        var time = Date.now()
+        var time = Date.now();
         trackedData.push({
-        timestamp: time,
-        trigger: trigger,
-      });
-      console.log(trackedData)
+          timestamp: time,
+          trigger: trigger,
+        });
+        console.log(trackedData);
       }
 
-      document.getElementById("navBlocks").addEventListener("click", () => addTrackedData("BlocksPanelClicked"))
-      document.getElementById("navPython").addEventListener("click", () => addTrackedData("PythonPanelClicked"))
-      document.getElementById("navSim").addEventListener("click", () => addTrackedData("SimPanelClicked"))
+      document
+        .getElementById("navBlocks")
+        .addEventListener("click", () => addTrackedData("BlocksPanelClicked"));
+      document
+        .getElementById("navPython")
+        .addEventListener("click", () => addTrackedData("PythonPanelClicked"));
+      document
+        .getElementById("navSim")
+        .addEventListener("click", () => addTrackedData("SimPanelClicked"));
 
       const CLIENT_ID =
         "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
@@ -256,7 +262,7 @@
        *  Sign in the user upon button click.
        */
       function handleAuthClick(id) {
-        userId = id
+        userId = id;
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
