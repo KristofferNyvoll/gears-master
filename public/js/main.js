@@ -57,8 +57,6 @@ var main = new (function () {
     self.splash();
   };
 
-
-
   // Update text already in html
   this.updateTextLanguage = function () {
     $("#navBlocks").text(i18n.get("#main-blocks#"));
@@ -275,7 +273,7 @@ var main = new (function () {
     "keyup",
     (event) => {
       var code = event.code;
-      addTrackedData(code)
+      addTrackedData(code);
     },
     false
   );
@@ -458,15 +456,15 @@ var main = new (function () {
   ];
 
   function decrement() {
-    addTrackedData("dashboardDecremented")
+    addTrackedData("dashboardDecremented");
     if (dashboardCount > 0) {
       dashboardCount--;
       renderDashboard();
-    } 
+    }
   }
 
   function increment() {
-    addTrackedData("dashboardIncremented")
+    addTrackedData("dashboardIncremented");
     if (dashboardCount < 3) {
       dashboardCount++;
       renderDashboard();
@@ -484,7 +482,7 @@ var main = new (function () {
     let $body = $(
       '<div id="dashboard" class="about">' + content[dashboardCount] + "</div>"
     );
-    addTrackedData("dashboardOpened")
+    addTrackedData("dashboardOpened");
 
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
@@ -493,7 +491,7 @@ var main = new (function () {
     let $dialog = dialog("Dashboard", $body, $buttons);
 
     $buttons.click(function () {
-      addTrackedData("dashboardClosed")
+      addTrackedData("dashboardClosed");
       $dialog.close();
     });
 
@@ -1271,9 +1269,11 @@ var main = new (function () {
   async function saveId() {
     userId = document.getElementById("idField").value;
     await handleAuthClick(userId);
+    console.log("id saved");
     setInterval(async function () {
+      console.log("addRow()");
       await addRow();
-    }, 300000); // every 5 minutes
+    }, 60000); // every minute
     //clearInterval(interval);
   }
 
