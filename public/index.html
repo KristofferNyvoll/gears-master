@@ -187,16 +187,16 @@
 
       // Create list of tuples with timestamp and keypress
 
-      var userId
+      var userId;
       var trackedData = [];
 
       function addTrackedData(trigger) {
-        var time = Date.now()
+        var time = Date.now();
         trackedData.push({
-        timestamp: time,
-        trigger: trigger,
-      });
-      console.log(trackedData)
+          timestamp: time,
+          trigger: trigger,
+        });
+        console.log(trackedData);
       }
 
       const CLIENT_ID =
@@ -252,7 +252,7 @@
        *  Sign in the user upon button click.
        */
       function handleAuthClick(id) {
-        userId = id
+        userId = id;
         tokenClient.callback = async (resp) => {
           if (resp.error !== undefined) {
             throw resp;
@@ -317,6 +317,11 @@
       src="https://accounts.google.com/gsi/client"
       onload="gisLoaded()"
     ></script>
+    <script type="text/javascript">
+      window.onbeforeunload = function () {
+        return "Vennlist ikke last inn siden på nytt. Spør om du lurer på noe";
+      };
+    </script>
     <script src="blockly/3.20200402.1/blockly.js"></script>
     <script src="blockly/3.20200402.1/blocks.js"></script>
     <script src="blockly/3.20200402.1/python.js"></script>
