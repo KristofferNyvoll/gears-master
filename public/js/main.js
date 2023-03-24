@@ -57,8 +57,6 @@ var main = new (function () {
     self.splash();
   };
 
-
-
   // Update text already in html
   this.updateTextLanguage = function () {
     $("#navBlocks").text(i18n.get("#main-blocks#"));
@@ -275,7 +273,7 @@ var main = new (function () {
     "keyup",
     (event) => {
       var code = event.code;
-      addTrackedData(code)
+      addTrackedData(code);
     },
     false
   );
@@ -404,6 +402,7 @@ var main = new (function () {
   // Dashboard
   let dashboardCount = 0;
   let content = [
+    /* 
     // DB 1
     "<div></div>" +
       "<h3>Idemyldring</h3>" +
@@ -454,19 +453,45 @@ var main = new (function () {
       "</ul>" +
       "<p>Definer 3-5 konkrete forslag til hva som kan endre/forbedre roboten</p>" +
       '<button id="leftButton"> <- </button>' +
+      '<button id="rightButton" disabled> -> </button>', 
+      */
+    // DB 5
+    "<div></div>" +
+      "<h3>Oppsummering av forrige time</h3>" +
+      "<p>Det er fort gjort å glemme hva man gjorde for to uker siden. Her er en påminnelse: </p>" +
+      "<ul>" +
+      "<li>Idemyldring: Dere tenkte gjennom ulike aspekter ved brannredning</li>" +
+      "<li>Utforskning: Dere ble kjent med roboten og (deler av) programmet</li>" +
+      "<li>Informasjonssamling: Dere leste gjennom arkene vi delte ut og samlet inn relevant informasjon</li>" +
+      "<li>Forslag: Dere definerte noen konkrete forslag til hva som kan endre/forbedre roboten slik at den kan gjennomføre brannredning på en god måte</li>" +
+      "</ul>" +
+      "<p>Gå til neste side for å se hva som er plan for dagen!</p>" +
+      '<button id="leftButton"> <- </button>' +
+      '<button id="rightButton" disabled> -> </button>',
+    // DB 6
+    "<div></div>" +
+      "<h3>Prototyping</h3>" +
+      "<p>I dag skal dere faktisk bruke verktøyet! Velg en av ideene deres fra forrige time (eller finn på en ny), og prøv å implementere den. Tips: </p>" +
+      "<ul>" +
+      "<li>Sjekk ut hvordan blokkprogrammeringen fungerer</li>" +
+      "<li>Legg til ting på roboten som kan hjelpe med brannredning</li>" +
+      "</ul>" +
+      "<p>Det er ikke forventet at dere skal komme i mål på så kort tid - vi ønsker bare å se hvordan dere går frem for å løse problemet</p>" +
+      "<p>Ikke nøl med å spørre oss om hjelp!</p>" +
+      '<button id="leftButton"> <- </button>' +
       '<button id="rightButton" disabled> -> </button>',
   ];
 
   function decrement() {
-    addTrackedData("dashboardDecremented")
+    addTrackedData("dashboardDecremented");
     if (dashboardCount > 0) {
       dashboardCount--;
       renderDashboard();
-    } 
+    }
   }
 
   function increment() {
-    addTrackedData("dashboardIncremented")
+    addTrackedData("dashboardIncremented");
     if (dashboardCount < 3) {
       dashboardCount++;
       renderDashboard();
@@ -484,7 +509,7 @@ var main = new (function () {
     let $body = $(
       '<div id="dashboard" class="about">' + content[dashboardCount] + "</div>"
     );
-    addTrackedData("dashboardOpened")
+    addTrackedData("dashboardOpened");
 
     let $buttons = $(
       '<button type="button" class="confirm btn-success">Ok</button>'
@@ -493,7 +518,7 @@ var main = new (function () {
     let $dialog = dialog("Dashboard", $body, $buttons);
 
     $buttons.click(function () {
-      addTrackedData("dashboardClosed")
+      addTrackedData("dashboardClosed");
       $dialog.close();
     });
 
