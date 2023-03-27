@@ -71,8 +71,8 @@
           <!-- <div class="menuItem fileMenu">File</div>
           <div class="menuItem pythonMenu">Python</div> -->
           <div class="menuItem robotMenu">Robot</div>
-          <!-- <div class="menuItem worldsMenu">Worlds</div>
-          <div class="menuItem helpMenu">Help</div> -->
+          <div class="menuItem worldsMenu">Worlds</div>
+          <!-- <div class="menuItem helpMenu">Help</div> -->
           <div class="menuItem dashBoard">Dashboard</div>
         </div>
 
@@ -199,15 +199,22 @@
         console.log(trackedData);
       }
 
-      document.getElementById("navBlocks").addEventListener("click", () => addTrackedData("BlocksPanelClicked"))
-      document.getElementById("navPython").addEventListener("click", () => addTrackedData("PythonPanelClicked"))
-      document.getElementById("navSim").addEventListener("click", () => addTrackedData("SimPanelClicked"))
+      document
+        .getElementById("navBlocks")
+        .addEventListener("click", () => addTrackedData("BlocksPanelClicked"));
+      document
+        .getElementById("navPython")
+        .addEventListener("click", () => addTrackedData("PythonPanelClicked"));
+      document
+        .getElementById("navSim")
+        .addEventListener("click", () => addTrackedData("SimPanelClicked"));
 
       const CLIENT_ID =
         "1032998752582-sdokioblup5spcuap4c76jfis91djcu9.apps.googleusercontent.com";
       const API_KEY = "AIzaSyB80SOar0yZzpo_A58ylaxmzi_N1OHZXkY";
 
-      const SPREADSHEET_ID = "19qeecU0gOjoilW3suh4pRR-MI2gH_CfY1gDzU3ojaVc"; //test sheet
+      const SPREADSHEET_ID = "1XsuGFUhM6RmDGgpQ8_-Zj5v1rRPZEw59X7vTDWDTiq4"; // test2
+      //"19qeecU0gOjoilW3suh4pRR-MI2gH_CfY1gDzU3ojaVc"; //test sheet
 
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC =
@@ -287,7 +294,7 @@
         let formattedData = formatTrackedData(trackedData);
         const request = {
           spreadsheetId: SPREADSHEET_ID,
-          range: `Sheet${userId}`,
+          range: `Ark ${userId}`,
           valueInputOption: "USER_ENTERED",
           insertDataOption: "INSERT_ROWS",
           resource: {
