@@ -466,8 +466,8 @@ var main = new (function () {
       "<li>Forslag: Dere definerte noen konkrete forslag til hva som kan endre/forbedre roboten slik at den kan gjennomføre brannredning på en god måte</li>" +
       "</ul>" +
       "<p>Gå til neste side for å se hva som er plan for dagen!</p>" +
-      '<button id="leftButton"> <- </button>' +
-      '<button id="rightButton" disabled> -> </button>',
+      '<button id="leftButton" disabled> <- </button>' +
+      '<button id="rightButton"> -> </button>',
     // DB 6
     "<div></div>" +
       "<h3>Prototyping</h3>" +
