@@ -29,8 +29,8 @@ var world_FireRescue = new (function () {
       optionsHTML: {
         grocers:
           "<p>The grocery store is on fire, and there are 7 victims inside. " +
-          "Bring the red victims to the red rescue point within the first 4 mins, and the green victims to the green rescue point.<p>" +
-          "<p>You have 8 mins to rescue everyone!</p>",
+          "Bring the red victims to the red rescue point within the first 6 mins, and the green victims to the green rescue point.<p>" +
+          "<p>You have 12 mins to rescue everyone!</p>",
         warehouse:
           "<p>Rescue the victims from the warehouse! " +
           "Bring the red victims to the red rescue point within the first 5 mins, and the green victims to the green rescue point.<p>" +
@@ -548,8 +548,8 @@ var world_FireRescue = new (function () {
     self.game.greenRescueMesh.isPickable = false;
 
     // set time limits
-    self.game.RED_EXPIRY = 4 * 60 * 1000;
-    self.game.TIME_LIMIT = 40 * 60 * 1000;
+    self.game.RED_EXPIRY = 6 * 60 * 1000;
+    self.game.TIME_LIMIT = 12 * 60 * 1000;
 
     // set the render and score drawing functions
     self.render = self.renderDefault;

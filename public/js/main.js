@@ -474,7 +474,8 @@ var main = new (function () {
       "<p>I dag skal dere faktisk bruke verktøyet! Velg en av ideene deres fra forrige time (eller finn på en ny), og prøv å implementere den. Tips: </p>" +
       "<ul>" +
       "<li>Sjekk ut hvordan blokkprogrammeringen fungerer</li>" +
-      "<li>Legg til ting på roboten som kan hjelpe med brannredning</li>" +
+      "<li>Legg til ting eller funksjonalitet på roboten som kan hjelpe med brannredning</li>" +
+      "<li>Ikke vær redd for å prøve forskjellige ting! </li>" +
       "</ul>" +
       "<p>Det er ikke forventet at dere skal komme i mål på så kort tid - vi ønsker bare å se hvordan dere går frem for å løse problemet</p>" +
       "<p>Ikke nøl med å spørre oss om hjelp!</p>" +
