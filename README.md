@@ -1,39 +1,21 @@
-Gears
+Master Thesis Project - Gears
 ===
 Generic Educational Autonomous Robotics Simulator
 
 This simulator was created to allow anyone to experiment with robotics without owning a robot.
 
-Try it out at https://gears.aposteriori.com.sg
+The original fork by QuirkyCort (https://github.com/QuirkyCort) was further developed by two master students (https://github.com/KristofferNyvoll and https://github.com/yvindo) to test a Master's Thesis at NTNU. 
 
-...or the latest version from github https://quirkycort.github.io/gears/public/
-
-It uses the Ev3dev api (...and some early support for Pybricks), so the code can run on an actual Lego Mindstorm EV3 if you have one.
-
-Installation
+Running the project locally
 ---
 
-The simulator is meant to be served through a webserver, and we maintain the site at https://gears.aposteriori.com.sg free for anyone to use.
-
-If you wish to run your own local copy, download all files and put them in a directory on your server and that should be it.
-Due to CORS protection on web browsers, it will not work when served from a "file://" URL.
-
-Without a Webserver
----
-
-If you do not have a webserver, but have Python3 installed on your computer, you can try...
-
-1. Download Gears from https://github.com/QuirkyCort/gears/archive/refs/heads/master.zip
-2. Change to the "gears/public" directory
-3. Run `python -m http.server 1337`
-Do not close the window with the Python command running.
-
-This should get the site running on http://localhost:1337 (...try http://127.0.0.1:1337 if that doesn't work).
-
-The site may also be available to other users on the same network using http://your_IP_address:1337, where "your_IP_address" is replaced with your actual IP address.
-This may not work depending on your network configuration and your firewall settings.
-
-If you do not wish to allow other users from accessing the site, you should run `python -m http.server 1337 --bind 127.0.0.1` instead.
+You need to have `git` and `python3` installed to run this project. 
+```bash
+$ git clone https://github.com/KristofferNyvoll/gears-master.git
+$ cd public
+$ python3 -m http.server 1337
+```
+You should now be able to see the project at http://localhost:1337/
 
 Credits
 ---
